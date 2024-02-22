@@ -15,7 +15,7 @@ select
     sr_flag as store_and_fwd_flag
     -- payment info
 from {{ source('staging','fhv_tripdata') }}
-where pickup_datetime between '2019-01-01' and '2019-12-31'
+where cast(pickup_datetime as date) between '2019-01-01' and '2019-12-31'
 
 -- dbt build --select <model_name> --vars '{'is_test_run': 'false'}'
 {% if var('is_test_run', default=true) %}
